@@ -14,7 +14,7 @@ after_success:
   - docker build -t matteodngh/multi-server ./server
   - docker build -t matteodngh/multi-worker ./worker
   # log in to the docker file
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin docker.io
   # take those images and push them to docker hub
   - docker push matteodngh/multi-client 
   - docker push matteodngh/multi-nginx 
