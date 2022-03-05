@@ -2,7 +2,6 @@ version: '3'
 services:
   postgres: 
     image: 'postgres:latest'
-    container_name: 'postgres_container'
     environment:
       - POSTGRES_PASSWORD=postgres_password
   redis: 
@@ -33,8 +32,6 @@ services:
       - PGPASSWORD=postgres_password
       - PGPORT=5432
   client: 
-    environment:
-      - WDS_SOCKET_PORT=0
     stdin_open: true
     build: 
       dockerfile: Dockerfile.dev
