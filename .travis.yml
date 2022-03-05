@@ -1,0 +1,22 @@
+sudo: required
+services: 
+  -  docker
+
+before_install: 
+  - docker build -t matteodngh/react-test -f ./client/Dockerfile.dev ./client
+
+script: 
+  - docker run -e CI=true matteodngh/react-test npm test
+
+after_success: 
+  - docker build -t matteodngh/multi-client ./client
+  - docker build -t matteodngh/multi-nginx ./nginx
+  - docker build -t matteodngh/multi-server ./server
+  - docker build -t matteodngh/multi-worker ./worker
+  # log in to the docker file
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take those images and push them to docker hub
+  - docker push matteodngh/multi-client 
+  - docker push matteodngh/multi-nginx 
+  - docker push matteodngh/multi-server 
+  - docker push matteodngh/multi-worker 
