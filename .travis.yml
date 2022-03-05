@@ -20,3 +20,5 @@ after_success:
   - docker push mdndocker/multi-nginx 
   - docker push mdndocker/multi-server 
   - docker push mdndocker/multi-worker 
+
+
